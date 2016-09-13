@@ -2,9 +2,10 @@
 # @param {Integer[][]} prerequisites
 # @return {Integer[]}
 def find_order(num_courses, prerequisites)
+  return [] if num_courses <= 0
   prerequisites_hash = build_prerequisites_hash(prerequisites)
   courses_need_prerequisites = prerequisites_hash.keys
-  courses_dont_need_prerequisites = prerequisites_hash.values.flatten.uniq - courses_need_prerequisites
+  courses_dont_need_prerequisites = (0...num_courses).to_a - courses_need_prerequisites
 
   while courses_need_prerequisites.size > 0
     course_id = courses_need_prerequisites.detect do |course_id|
@@ -17,10 +18,6 @@ def find_order(num_courses, prerequisites)
     else
       courses_dont_need_prerequisites << course_id
       courses_need_prerequisites = courses_need_prerequisites - [course_id]
-    end
-
-    if courses_dont_need_prerequisites.size > num_courses
-      return []
     end
     
   end
