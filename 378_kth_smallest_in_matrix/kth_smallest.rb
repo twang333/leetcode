@@ -3,12 +3,25 @@
 # @return {Integer}
 def kth_smallest(matrix, k)
   n = matrix[0].size
-  minHeap = new MinHeap do
+  minHeap = MinHeap.new do
     (0...n).map do |i|
-      new Node i, 0, matrix[i][0]
+      Node.new i, 0, matrix[i][0]
     end
   end
 
+  (k-1).times do |i|
+    node = minHeap.root
+    if node.index_horizontal < n - 1 
+      vertical   = node.index_vertical
+      horizontal = node.index_horizontal
+      new_node = Node.new vertical, horizontal+1, matrix[vertical][horizontal+1]
+      minHeap.replace new_node
+    else
+      minHeap.extract
+    end
+  end
+
+  return minHeap.root.value
 end
 
 
@@ -118,3 +131,9 @@ class MinHeap
   end
 
 end
+
+matrix = [[ 1,  5,  9], [10, 11, 13], [12, 13, 15] ]
+k = 8 
+p "Given matrix = #{matrix}, k = #{k}"
+p "Expected: 13"
+p "Actual: #{kth_smallest(matrix, k)}"
