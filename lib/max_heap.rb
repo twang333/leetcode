@@ -1,4 +1,4 @@
-class MinHeap
+class MaxHeap
   attr_accessor :array
   def initialize(array = [])
     @array = array
@@ -10,8 +10,8 @@ class MinHeap
 
   def heapify
     return if array.size < 2
-    array[1..-1].each_with_index do |item, index|
-      heapify_up(index+1)
+    array[1..-1].each_with_index do |item, i|
+      heapify_up(i + 1)
     end
   end
 
@@ -19,15 +19,15 @@ class MinHeap
     index ||= array.size - 1
 
     parent_index = (index - 1)/2
-    smallest = index
+    largest = index
 
-    if parent_index >= 0 && array[parent_index] > array[smallest]
-      smallest = parent_index
+    if parent_index >= 0 && array[parent_index] < array[largest]
+      largest = parent_index
     end
 
-    if smallest != index
-      swap(index, smallest)
-      heapify_up(smallest)
+    if largest != index
+      swap(index, largest)
+      heapify_up(largest)
     end
   end
 
@@ -37,19 +37,19 @@ class MinHeap
 
     left_child = 2 * index + 1
     right_child = 2 * index + 2
-    smallest = index
+    largest = index
 
-    if left_child < size && array[smallest] > array[left_child]
-      smallest = left_child
+    if left_child < size && array[largest] < array[left_child]
+      largest = left_child
     end
 
-    if right_child < size && array[smallest] > array[right_child]
-      smallest = right_child
+    if right_child < size && array[largest] < array[right_child]
+      largest = right_child
     end
 
-    if index != smallest
-      swap(index, smallest)
-      heapify_down(smallest)
+    if index != largest
+      swap(index, largest)
+      heapify_down(largest)
     end
 
   end
@@ -78,6 +78,21 @@ class MinHeap
 
   def root
     array.first
+  end
+
+  def search_closest(node, index = 0)
+    if index < array.size && array[index] >= node 
+      left_child_index  = 2*index + 1
+      right_child_index = 2*index + 2 
+
+      left = search_closest(node, left_child_index)
+      right = search_closest(node, right_child_index)
+
+      return [left, right, array[index]].compact.min
+
+    else
+      return nil 
+    end
   end
 
   private
