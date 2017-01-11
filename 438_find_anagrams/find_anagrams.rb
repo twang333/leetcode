@@ -4,12 +4,27 @@
 def find_anagrams(s, p)
   return [] if s.size < p.size
   p_hash = build_char_hash(p)
+  substring_hash = build_char_hash(s[0...p.size])
   result = []
-  (0..(s.size - p.size)).each do |index|
-    sub_string = s[index...(index + p.size)]
-    if build_char_hash(sub_string) == p_hash
-      result << index
+  (0..(s.size - p.size)).each do |i|
+    if substring_hash == p_hash
+      result << i
     end
+
+    char_to_remove = s[i..i]
+    char_to_add = s[i+p.size..i+p.size]
+    if substring_hash[char_to_remove] > 1
+      substring_hash[char_to_remove] -= 1
+    else
+      substring_hash.delete char_to_remove
+    end
+
+    if substring_hash[char_to_add]
+      substring_hash[char_to_add] += 1
+    else
+      substring_hash[char_to_add] = 1
+    end
+
   end
 
   return result
