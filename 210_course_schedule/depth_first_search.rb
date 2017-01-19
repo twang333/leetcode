@@ -6,8 +6,6 @@ def find_order(num_courses, prerequisites)
 
   # adjacency list
   adjacency_list = build_adjacency_list(num_courses, prerequisites)
-  require "pry"
-  binding.pry
 
   visited_flag = (0...num_courses).map {|i| false }
   is_loop_flag = (0...num_courses).map {|i| false }
