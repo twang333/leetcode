@@ -13,8 +13,8 @@ var fibonacci = function (i) {
   };
 
   return fib;
-}
+}();
 
 for(var i = 0; i < 10; i++) {
-  console.log(fibonacci()(i))
+  console.log(fibonacci(i))
 }
