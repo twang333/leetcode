@@ -1,4 +1,4 @@
-var fibonacci = function (i) {
+var fibonacci = function () {
   console.log("fibonacci")
   memo = [0, 1, 2];
 
