@@ -12,14 +12,14 @@
 def right_side_view(root)
   return [] if root.nil?
   result = []
-  queue = [[0,root]]
-  while !queue.empty?
-    height, node = queue.shift
+  stack = [[0,root]]
+  while !stack.empty?
+    height, node = stack.pop
     if result.size == height
       result << node.val
     end
-    queue.push [height+1, node.right] if node.right
-    queue.push [height+1, node.left] if node.left
+    stack.push [height+1, node.left] if node.left
+    stack.push [height+1, node.right] if node.right
   end
   return result
 end
