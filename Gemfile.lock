@@ -1,0 +1,18 @@
+GIT
+  remote: https://github.com/kanwei/algorithms.git
+  revision: aecb08c66e460fa74a10fc9abf7fb39c5629c56e
+  specs:
+    algorithms (0.6.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  algorithms!
+
+BUNDLED WITH
+   1.12.5
