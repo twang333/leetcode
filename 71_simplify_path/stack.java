@@ -1,17 +1,17 @@
 public class Solution {
     public String simplifyPath(String path) {
         if(null == path) return null;
-        Deque<String> deque = new LinkedList<>();
+        Deque<String> stack = new LinkedList<>();
         char[] pathChars = (path+"/").toCharArray();
         
         String subStr = "";
         for(int i = 0; i < pathChars.length; i++) {
             if('/' == pathChars[i]) {
-                if(!subStr.isEmpty() && !subStr.equalsIgnoreCase(".") && !subStr.equalsIgnoreCase("..")) {
-                    deque.push(subStr);
+                if(!subStr.isEmpty() && !subStr.equals(".") && !subStr.equals("..")) {
+                    stack.push(subStr);
                 }
-                if(subStr.equalsIgnoreCase("..") && !deque.isEmpty()) {
-                    deque.pop();
+                if(subStr.equals("..") && !stack.isEmpty()) {
+                    stack.pop();
                 }
                 subStr = "";
             } else {
@@ -21,7 +21,7 @@ public class Solution {
         
         StringBuilder sb = new StringBuilder();
         sb.append("/");
-        while(!deque.isEmpty()) {
+        while(!stack.isEmpty()) {
             sb.append(deque.pollLast());
             sb.append("/");
         }
