@@ -1,3 +1,4 @@
+// inspired by https://discuss.leetcode.com/topic/65738/java-accepted-simple-solution
 public class Solution {
     public int firstMissingPositive(int[] nums) {
         for(int i = 0; i < nums.length; i++) {

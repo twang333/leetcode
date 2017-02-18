@@ -1,3 +1,4 @@
+// https://discuss.leetcode.com/topic/65738/java-accepted-simple-solution
 public class Solution {
     public List<Integer> findDisappearedNumbers(int[] nums) {
         List<Integer> res = new ArrayList<>();
